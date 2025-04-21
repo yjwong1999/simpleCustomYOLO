@@ -1,9 +1,14 @@
 # simpleCustomYOLO
 
+We can easily customized the backbone for `ultralytics` YOLO with TorchVision models. This can be easily done using `TorchVision` from `ultralytics.nn.modules.block`. Below are a simple example of customizing `YOLOv5` from ultralytics with `ResNet18`.
+
 ## Example of ResNet18-based YOLOv5
 
 Select a backbone from TorchVision
 ```python
+from ultralytics.nn.modules.block import TorchVision
+import torch
+
 # load your prefered backbone
 mods = TorchVision('resnet18', 'DEFAULT', True, 2, True)
 
