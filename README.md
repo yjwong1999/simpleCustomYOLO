@@ -44,3 +44,4 @@ backbone:
   - [0, 1, Index, [512, 8]]  # selects 8th output (1, 2048, 20, 20) - 3
   - [-1, 1, SPPF, [1024, 5]] # SPFF - 4
 ```
+☝️Notice that we use `Index` layer to select which outputs from the `TorchVision` layer. The `TorchVision` layer has 9 outpus (0 to 9) as shown in the backbone layout above. We need layers 6 to 8. Hence, we use `[0, 1, Index, [128, 6]]`, `[0, 1, Index, [256, 7]]` and `[0, 1, Index, [512, 8]]` to select the layers. Note that the `128, 256, 512` are the number of channels for each of these selected layers. Please modify according to your selected backbone/layers.
