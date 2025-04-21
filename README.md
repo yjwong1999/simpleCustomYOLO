@@ -113,3 +113,15 @@ head:
 
   - [[12, 15, 18], 1, Detect, [nc]] # Detect(P3, P4, P5)
 ```
+
+To train your model, save the yaml file as lets say `yolov5-resnet18.yaml`. Then, just load the model using `YOLO` and train as usual.
+
+```python
+from ultralytics import YOLO
+
+# Load your custom model
+model = YOLO("yolov5-resnet18.yaml")  # load a pretrained model (recommended for training)
+
+# Train the model
+results = model.train(data="/path/to/your/data.yaml", epochs=20, imgsz=960, batch=16, val=False)
+```
