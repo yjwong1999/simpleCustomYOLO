@@ -49,7 +49,7 @@ backbone:
   - [0, 1, Index, [512, 8]]  # selects 8th output (1, 2048, 20, 20) - 3
   - [-1, 1, SPPF, [1024, 5]] # SPFF - 4
 ```
-☝️Notice that we use `Index` layer to select which outputs from the `TorchVision` layer. The `TorchVision` layer has 9 outpus (0 to 9) as shown in the backbone layout above. We need layers 6 to 8. Hence, we use `[0, 1, Index, [128, 6]]`, `[0, 1, Index, [256, 7]]` and `[0, 1, Index, [512, 8]]` to select the layers. Note that the `128, 256, 512` are the number of channels for each of these selected layers, while `6, 7, 8` are the selected outputs index from the `ResNet18`. Please modify according to your selected backbone/layers.
+☝️ Notice that we use `Index` layer to select which outputs from the `TorchVision` layer. The `TorchVision` layer has 9 outpus (0 to 9) as shown in the backbone layout above. We need layers 6 to 8. Hence, we use `[0, 1, Index, [128, 6]]`, `[0, 1, Index, [256, 7]]` and `[0, 1, Index, [512, 8]]` to select the layers. Note that the `128, 256, 512` are the number of channels for each of these selected layers, while `6, 7, 8` are the selected outputs index from the `ResNet18`. Please modify according to your selected backbone/layers.
 
 For the neck and detection heads, you can just copy from the YOLO version you want. For example, we can copy from YOLOv5, as shown below:
 ```yaml
@@ -75,7 +75,7 @@ head:
 
   - [[12, 15, 18], 1, Detect, [nc]] # Detect(P3, P4, P5)
 ```
-Note that you would need to modify the arguments `from` to make sure the layers are connected to your custom backbone at the correct layer. The example above has been modified to fit YOLOv5 neck and head with our custom `ResNet18`.
+☝️ Note that you would need to modify the arguments `from` to make sure the layers are connected to your custom backbone at the correct layer. The example above has been modified to fit YOLOv5 neck and head with our custom `ResNet18`.
 
 Finally, the entire `yaml` file for ResNet18-YOLOv5 can be written as follows:
 ```yaml
