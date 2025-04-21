@@ -72,3 +72,39 @@ head:
 ```
 Note that you would need to modify the arguments `from` to make sure the layers are connected to your custom backbone at the correct layer. The example above has been modified to fit YOLOv5 neck and head with our custom `ResNet18`.
 
+Finally, the entire `yaml` file for ResNet18-YOLOv5 can be written as follows:
+```yaml
+# Ultralytics YOLO 🚀, AGPL-3.0 license
+
+# Parameters
+nc: 80 # number of classes
+
+backbone:
+  # [from, number, module, args]
+  - [-1, 1, TorchVision, [2048, "resnet18", "DEFAULT", True, 2, True]]  # - 0
+  - [0, 1, Index, [128, 6]]   # selects 6th output (1, 512, 80, 80) - 1
+  - [0, 1, Index, [256, 7]]  # selects 7th output (1, 1024, 40, 40) - 2
+  - [0, 1, Index, [512, 8]]  # selects 8th output (1, 2048, 20, 20) - 3
+  - [-1, 1, SPPF, [1024, 5]] # SPFF - 4
+
+head:
+  - [-1, 1, Conv, [512, 1, 1]]
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 2], 1, Concat, [1]] # cat backbone P4
+  - [-1, 3, C3, [512, False]] # 8
+
+  - [-1, 1, Conv, [256, 1, 1]]
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 1], 1, Concat, [1]] # cat backbone P3
+  - [-1, 3, C3, [256, False]] # 12 (P3/8-small)
+
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 8], 1, Concat, [1]] # cat head P4
+  - [-1, 3, C3, [512, False]] # 15 (P4/16-medium)
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 4], 1, Concat, [1]] # cat head P5
+  - [-1, 3, C3, [1024, False]] # 18 (P5/32-large)
+
+  - [[12, 15, 18], 1, Detect, [nc]] # Detect(P3, P4, P5)
+```
