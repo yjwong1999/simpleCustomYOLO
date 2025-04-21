@@ -49,6 +49,7 @@ backbone:
 For the neck and detection heads, you can just copy from the YOLO version you want. For example, we can copy from YOLOv5, as shown below:
 ```yaml
 head:
+  # [from, number, module, args]
   - [-1, 1, Conv, [512, 1, 1]]
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
   - [[-1, 2], 1, Concat, [1]] # cat backbone P4
@@ -69,3 +70,5 @@ head:
 
   - [[12, 15, 18], 1, Detect, [nc]] # Detect(P3, P4, P5)
 ```
+Note that you would need to modify the arguments `from` to make sure the layers are connected to your custom backbone at the correct layer. The example above has been modified to fit YOLOv5 neck and head with our custom `ResNet18`.
+
