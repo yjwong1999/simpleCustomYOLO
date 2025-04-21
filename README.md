@@ -39,7 +39,7 @@ Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /roo
 8 torch.Size([1, 512, 20, 20]) # we want this layer
 ```
 
-From the outputs, you can see the outputs of the selected backbone. Usually, you can select the last 3 (or 4 depending on your needs) outputs as the intermediate features for the neck layer of your YOLO. For this example, we are modifying YOLOv5. Hence, we only need 3 intermediate features/outputs (layer 6 to 8_ from the outputs above. Then, we add `SPPF` layers, similar to YOLOv5.
+From the outputs, you can see the outputs of the selected backbone. Usually, you can select the last 3 (or 4 depending on your needs) outputs as the intermediate features for the neck layer of your YOLO. For this example, we are modifying YOLOv5. Hence, we only need 3 intermediate features/outputs (layer 6 to 8) from the outputs above. Then, we add `SPPF` layers, similar to YOLOv5.
 ```yaml
 backbone:
   # [from, number, module, args]
