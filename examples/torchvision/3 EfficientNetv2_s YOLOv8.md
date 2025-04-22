@@ -22,17 +22,15 @@ for i in range(len(out)):
 
 Sample outputs:
 ```
-Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /root/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth
-100%|██████████| 44.7M/44.7M [00:00<00:00, 125MB/s]
 0 torch.Size([1, 3, 640, 640])
-1 torch.Size([1, 64, 320, 320])
-2 torch.Size([1, 64, 320, 320])
-3 torch.Size([1, 64, 320, 320])
-4 torch.Size([1, 64, 160, 160])
-5 torch.Size([1, 64, 160, 160])
-6 torch.Size([1, 128, 80, 80]) # we want this layer
-7 torch.Size([1, 256, 40, 40]) # we want this layer
-8 torch.Size([1, 512, 20, 20]) # we want this layer
+1 torch.Size([1, 24, 320, 320])
+2 torch.Size([1, 24, 320, 320])
+3 torch.Size([1, 48, 160, 160])
+4 torch.Size([1, 64, 80, 80])   # we want this layer
+5 torch.Size([1, 128, 40, 40]) 
+6 torch.Size([1, 160, 40, 40])  # we want this layer
+7 torch.Size([1, 256, 20, 20])
+8 torch.Size([1, 1280, 20, 20]) # we want this layer
 ```
 
 From the outputs, you can see the outputs of the selected backbone. Usually, you can select the last 3 (or 4 depending on your needs) outputs as the intermediate features for the neck layer of your YOLO. For this example, we are modifying YOLOv5. Hence, we only need 3 intermediate features/outputs (layer 6 to 8) from the outputs above. Then, we add `SPPF` layers, similar to YOLOv5.
