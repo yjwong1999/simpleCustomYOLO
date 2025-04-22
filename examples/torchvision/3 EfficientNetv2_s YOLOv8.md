@@ -1,4 +1,4 @@
-## Example of ResNet18-based YOLOv5
+## Example of EfficientNetv2_s-based YOLOv5
 
 Select a backbone from TorchVision
 ```python
@@ -6,7 +6,7 @@ from ultralytics.nn.modules.block import TorchVision
 import torch
 
 # load your prefered backbone
-mods = TorchVision('resnet18', 'DEFAULT', True, 2, True)
+mods = TorchVision('efficientnet_v2_s', 'DEFAULT', True, 2, True)
 
 # print each module in mods
 # mods.m
