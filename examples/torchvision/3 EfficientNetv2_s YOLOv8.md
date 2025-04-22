@@ -1,4 +1,4 @@
-## Example of EfficientNetv2_s-based YOLOv5
+## Example of EfficientNetv2_s-based YOLOv8
 
 Select a backbone from TorchVision
 ```python
@@ -33,7 +33,7 @@ Sample outputs:
 8 torch.Size([1, 1280, 20, 20]) # we want this layer
 ```
 
-👆 From the outputs, you can see the outputs of the selected backbone. As mentioned in the first 2 tutorials, the outpus are useful for us to construct the `yaml` file.
+👆 From the outputs, you can see the outputs of the selected backbone. As mentioned in the first 2 tutorials, the outputs are useful for us to construct the `yaml` file.
 
 ⚠️ If you recall back from our tutorial of ResNet18-based YOLOv5/v8, we extracted the last 3 outputs of torchvision ResNet18 as the intermediate features for neck layer. 
 
@@ -57,7 +57,7 @@ backbone:
 ```
 ☝️ Notice that we use `Index` layer to select which outputs from the `TorchVision` layer. The `TorchVision` layer has 9 outputs (0 to 8) as shown in the backbone layout above. We need layers 4, 6, 8. Hence, we use `[0, 1, Index, [64, 4]]`, `[0, 1, Index, [160, 6]]` and `[0, 1, Index, [1280, 8]]` to select the layers. Note that the `64, 160, 1280` are the number of channels for each of these selected layers, while `4, 6, 8` are the selected outputs index from the `efficientnet_v2_s`. Please modify according to your selected backbone/layers.
 
-For the neck and detection heads, you can just copy from the YOLO version you want. For example, we can copy from YOLOv5, as shown below:
+For the neck and detection heads, you can just copy from the YOLO version you want. For example, we can copy from YOLOv8, as shown below:
 ```yaml
 head:
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
@@ -80,7 +80,7 @@ head:
 ```
 ☝️ Note that you would need to modify the arguments `from` to make sure the layers are connected to your custom backbone at the correct layer. The example above has been modified to fit YOLOv8 neck and head with our custom `EfficientNetv2_s`.
 
-Finally, the entire `yaml` file for ResNet18-YOLOv5 can be written as follows:
+Finally, the entire `yaml` file for ResNet18-YOLOv8 can be written as follows:
 ```yaml
 # Ultralytics YOLO 🚀, AGPL-3.0 license
 # Ultralytics YOLO 🚀, AGPL-3.0 license
