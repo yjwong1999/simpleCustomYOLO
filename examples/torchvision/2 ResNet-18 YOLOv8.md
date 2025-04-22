@@ -119,5 +119,3 @@ model = YOLO("YOLOv8-resnet18.yaml")  # load a pretrained model (recommended for
 # Train the model
 results = model.train(data="/path/to/your/data.yaml", epochs=20, imgsz=960, batch=16, val=False)
 ```
-
-📢Tutorials for YOLO customization using Timm will be out soon!
