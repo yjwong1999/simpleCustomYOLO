@@ -35,7 +35,8 @@ Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /roo
 8 torch.Size([1, 512, 20, 20]) # we want this layer
 ```
 
-From the outputs, you can see the outputs of the selected backbone. Usually, you can select the last 3 (or 4 depending on your needs) outputs as the intermediate features for the neck layer of your YOLO. For this example, we are modifying YOLOv5. Hence, we only need 3 intermediate features/outputs (layer 6 to 8) from the outputs above. Then, we add `SPPF` layers, similar to YOLOv5.
+From the outputs, you can see the outputs of the selected backbone. Usually, we only need 3 outputs from the backbone as the intermediate features for the neck layer of your YOLO. You can use 4 or 5 outputs if you want the increase the model complexity as well. But generally, YOLO family usually only uses 3 outputs from the backbone. ⚠️ Note that the 3 (or more) outputs should have the resolultion size being the `2X multiple` of the next one. In this case, you can see that the outputs `6`, `7`, and `8` have resolutions size of `80x80`, `40x40`, and `20x20`, respectively. Hence, we can directly use the last 3 outputs of the ResNet18 backbone to connect with the neck layer. Please refer
+[this example](examples/torchvision/3 EfficientNetv2_s YOLOv8.md) to see a more complicated example of selecting outputs from backbone.
 ```yaml
 backbone:
   # [from, number, module, args]
