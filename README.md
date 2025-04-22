@@ -6,7 +6,7 @@ This is a GitHub repo to teach you how to easily change your `ultralytics` yolo 
 1. [TorchVision examples](https://github.com/yjwong1999/simpleCustomYOLO/tree/main/examples/torchvision)
 2. [Timm examples, pending](https://github.com/yjwong1999/simpleCustomYOLO/tree/main/examples/torchvision)
 
-Here is a simple examples of ResNet-18-based YOLOv5:
+Here is a simple examples of ResNet-18-based YOLOv5. No extra codes needed! Only `yaml` file required.
 
 ```yaml
 # Ultralytics YOLO 🚀, AGPL-3.0 license
