@@ -6,7 +6,7 @@ This is a GitHub repo to teach you how to easily change your `ultralytics` yolo 
 1. [TorchVision examples](https://github.com/yjwong1999/simpleCustomYOLO/tree/main/examples/torchvision)
 2. [Timm examples](https://github.com/yjwong1999/simpleCustomYOLO/tree/main/examples/timm), pending
 
-Here is a simple examples of ResNet-18-based YOLOv5. No extra codes needed! Only `yaml` file required.
+👇 Here is a simple examples of ResNet-18-based YOLOv5. No extra codes needed! Only `yaml` file required.
 
 ```yaml
 # Ultralytics YOLO 🚀, AGPL-3.0 license
@@ -55,5 +55,3 @@ model = YOLO("yolov5-resnet18.yaml")  # load a pretrained model (recommended for
 # Train the model
 results = model.train(data="/path/to/your/data.yaml", epochs=20, imgsz=960, batch=16, val=False)
 ```
-
-📢Tutorials for YOLO customization using Timm will be out soon!
