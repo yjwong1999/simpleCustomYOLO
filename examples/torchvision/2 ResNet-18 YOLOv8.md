@@ -87,25 +87,23 @@ backbone:
   - [-1, 1, SPPF, [1024, 5]] # SPFF - 4
 
 head:
-  - [-1, 1, Conv, [512, 1, 1]]
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
   - [[-1, 2], 1, Concat, [1]] # cat backbone P4
-  - [-1, 3, C3, [512, False]] # 8
+  - [-1, 3, C2f, [512]] # 7
 
-  - [-1, 1, Conv, [256, 1, 1]]
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
   - [[-1, 1], 1, Concat, [1]] # cat backbone P3
-  - [-1, 3, C3, [256, False]] # 12 (P3/8-small)
+  - [-1, 3, C2f, [256]] # 10 (P3/8-small)
 
   - [-1, 1, Conv, [256, 3, 2]]
-  - [[-1, 8], 1, Concat, [1]] # cat head P4
-  - [-1, 3, C3, [512, False]] # 15 (P4/16-medium)
+  - [[-1, 7], 1, Concat, [1]] # cat head P4
+  - [-1, 3, C2f, [512]] # 13 (P4/16-medium)
 
   - [-1, 1, Conv, [512, 3, 2]]
   - [[-1, 4], 1, Concat, [1]] # cat head P5
-  - [-1, 3, C3, [1024, False]] # 18 (P5/32-large)
+  - [-1, 3, C2f, [1024]] # 16 (P5/32-large)
 
-  - [[12, 15, 18], 1, Detect, [nc]] # Detect(P3, P4, P5)
+  - [[10, 13, 16], 1, Detect, [nc]] # Detect(P3, P4, P5)
 ```
 
 To train your model, save the yaml file as lets say `YOLOv8-resnet18.yaml`. Then, just load the model using `YOLO` and train as usual.
